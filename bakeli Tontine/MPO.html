@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mot de passe oublié - Bakéli-tontine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+
+    <div class="flex w-full max-w-6xl shadow-2xl rounded-3xl bg-white overflow-hidden">
+        
+        <div class="hidden lg:flex lg:w-5/12 bg-custom-blue relative p-12 flex-col justify-center items-center sidebar-rounded">
+            <h1 class="text-3xl font-bold text-white mb-6">Bakéli-tontine</h1>
+            <div class="relative w-full max-w-sm h-96 flex items-center justify-center">
+                <p class="text-white text-center absolute"><img src="../Asset/mdpassoubliée.png" alt=""></p>
+            </div>
+        </div>
+
+        <div class="w-full lg:w-7/12 p-8 sm:p-12 md:p-16 flex flex-col items-center justify-center">
+            
+            <div class="bg-white p-10 rounded-xl shadow-xl w-full max-w-md text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-custom-blue">Mot de passe oublié</h2>
+                <p class="text-gray-600 mb-8">
+                    Pour réinitialiser votre mot de passe, entrez votre **N° téléphone ou E-mail**.
+                </p>
+
+                <form id="forgotPasswordForm" class="space-y-6" novalidate>
+                    <div>
+                        <input type="text" id="contactInfo" name="contactInfo" required
+                               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-3 px-4 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-lg"
+                               placeholder="N° téléphone ou E-mail">
+                        <p class="text-sm text-red-600 mt-1 hidden text-left" id="error-contactInfo">Veuillez entrer un N° téléphone (9 chiffres) ou un E-mail valide (@gmail.com).</p>
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit"
+                                class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-lg text-lg font-medium text-white bg-custom-green hover:bg-custom-green-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-green transition duration-150">
+                            Envoyer
+                        </button>
+                    </div>
+                </form>
+                
+                <p class="mt-6 text-gray-600 text-md">
+                    <a href="index.html" class="text-custom-blue font-bold hover:underline">Retour à la Connexion</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="emailSentModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white p-8 rounded-xl w-full max-w-sm shadow-2xl">
+            <h2 class="text-2xl font-bold text-custom-blue mb-4 text-center">E-mail envoyé</h2>
+            <p class="text-gray-700 mb-6 text-center" id="emailSentMessage">
+                Nous avons envoyé un e-mail à **<span id="targetEmailDisplay"></span>** avec un lien pour réinitialiser votre mot de passe.
+            </p>
+            <div class="flex justify-center">
+                <button id="okEmailSentBtn" class="px-8 py-3 bg-custom-green text-white font-semibold rounded-lg shadow-md hover:bg-custom-green-dark focus:outline-none transition">OK</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="../js/MPO.js"></script>
+    
+    </body>
+</html>

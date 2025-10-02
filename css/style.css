@@ -1,0 +1,23 @@
+/* Styles personnalisés pour l'inscription*/
+.bg-custom-blue { background-color: #0d3b4b; }
+.text-custom-blue { color: #0d3b4b; }
+.bg-custom-green { background-color: #38c172; }
+.hover\:bg-custom-green-dark:hover { background-color: #2ca05d; }
+@media (min-width: 1024px) {
+    .sidebar-rounded {
+        border-top-right-radius: 50px;
+        border-bottom-right-radius: 50px;
+    }
+}
+/* CONNEXION */
+/* Styles personnalisés */
+.bg-custom-blue { background-color: #0d3b4b; }
+.text-custom-blue { color: #0d3b4b; }
+.bg-custom-green { background-color: #38c172; }
+.hover\:bg-custom-green-dark:hover { background-color: #2ca05d; }
+@media (min-width: 1024px) {
+    .sidebar-rounded {
+        border-top-right-radius: 50px;
+        border-bottom-right-radius: 50px;
+    }
+}

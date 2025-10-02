@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - Bakeli Tontine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+
+    <div class="flex w-full max-w-6xl shadow-2xl rounded-3xl bg-white overflow-hidden">
+        
+        <div class="hidden lg:flex lg:w-5/12 bg-custom-blue relative p-12 flex-col justify-center items-center sidebar-rounded">
+            <h1 class="text-3xl font-bold text-white mb-6">Bakeli Tontine</h1>
+            <div class="relative w-full max-w-md h-96 flex items-center justify-center">
+                <p class="text-white text-center absolute"><img src="../Asset/inscription.png" alt=""></p>
+            </div>
+        </div>
+
+        <div class="w-full lg:w-7/12 p-8 sm:p-12 md:p-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center text-custom-blue">Inscription</h2>
+  
+            <form id="inscriptionForm" class="space-y-6" novalidate>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <div>
+                        <label for="nom" class="block text-sm font-medium text-gray-700">Nom <span class="text-red-500">*</span></label>
+                        <input type="text" id="nom" name="nom" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <p class="text-sm text-red-600 mt-1 hidden" id="error-nom">Le nom est requis.</p>
+                    </div>
+                    <div>
+                        <label for="prenom" class="block text-sm font-medium text-gray-700">Prénom <span class="text-red-500">*</span></label>
+                        <input type="text" id="prenom" name="prenom" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <p class="text-sm text-red-600 mt-1 hidden" id="error-prenom">Le prénom est requis.</p>
+                    </div>
+
+                    <div>
+                        <label for="date_naissance" class="block text-sm font-medium text-gray-700">Date de naissance <span class="text-red-500">*</span></label>
+                        <div class="relative mt-1">
+                            <input type="date" id="date_naissance" name="date_naissance" required class="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 pr-10 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            <span class="absolute right-3 top-2.5 text-gray-400">📅</span>
+                        </div>
+                        <p class="text-sm text-red-600 mt-1 hidden" id="error-date_naissance">La date de naissance est requise.</p>
+                    </div>
+                    <div>
+                        <label for="profession" class="block text-sm font-medium text-gray-700">Profession <span class="text-red-500">*</span></label>
+                        <input type="text" id="profession" name="profession" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <p class="text-sm text-red-600 mt-1 hidden" id="error-profession">La profession est requise.</p>
+                    </div>
+
+                    <div>
+                        <label for="mot_de_passe" class="block text-sm font-medium text-gray-700">Définir mot de passe <span class="text-red-500">*</span></label>
+                        <input type="password" id="mot_de_passe" name="mot_de_passe" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <p class="text-sm text-red-600 mt-1 hidden" id="error-mot_de_passe">Le mot de passe doit contenir au moins 8 caractères.</p>
+                    </div>
+                    <div>
+                        <label for="confirmer_mot_de_passe" class="block text-sm font-medium text-gray-700">Confirmer votre mot de passe <span class="text-red-500">*</span></label>
+                        <input type="password" id="confirmer_mot_de_passe" name="confirmer_mot_de_passe" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <p class="text-sm text-red-600 mt-1 hidden" id="error-confirmer_mot_de_passe">Les mots de passe ne correspondent pas.</p>
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">E-mail <span class="text-red-500">*</span></label>
+                        <input type="email" id="email" name="email" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <p class="text-sm text-red-600 mt-1 hidden" id="error-email">L'adresse e-mail doit obligatoirement être un @gmail.com.</p>
+                    </div>
+                    <div>
+                        <label for="telephone" class="block text-sm font-medium text-gray-700">Téléphone <span class="text-red-500">*</span></label>
+                        <input type="tel" id="telephone" name="telephone" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <p class="text-sm text-red-600 mt-1 hidden" id="error-telephone">Le numéro de téléphone doit contenir exactement 9 chiffres.</p>
+                    </div>
+                    
+                    <div>
+                        <label for="adresse" class="block text-sm font-medium text-gray-700">Adresse <span class="text-red-500">*</span></label>
+                        <input type="text" id="adresse" name="adresse" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <p class="text-sm text-red-600 mt-1 hidden" id="error-adresse">L'adresse est requise.</p>
+                    </div>
+                    <div>
+                        <label for="role" class="block text-sm font-medium">Rôle</label>
+                        <select id="role" class="w-full border rounded p-2">
+                        <option value="user">Utilisateur</option>
+                        <option value="admin">Admin</option>
+                        </select>
+                        <p class="text-red-600 text-sm hidden" id="error-role"></p>
+                    </div>
+                    
+                </div>
+                
+                <div class="mt-8">
+                    <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-custom-green hover:bg-custom-green-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-green">
+                        S'inscrire
+                    </button>
+                </div>
+                
+                <p class="mt-4 text-center text-sm text-gray-600">
+                    Vous avez déjà un compte, <a href="index.html" class="font-medium text-custom-blue hover:underline">Connectez-vous!</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div id="inscriptionSuccessModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white p-8 rounded-xl w-full max-w-sm shadow-2xl text-center">
+            <svg class="mx-auto h-16 w-16 text-custom-green mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h2 class="text-2xl font-bold text-custom-blue mb-3">Inscription Réussie !</h2>
+            <p class="text-gray-700 mb-6">
+                Votre compte a été créé avec succès. Vous pouvez maintenant vous connecter.
+            </p>
+            <div class="flex justify-center">
+                <a href="index.html" class="px-8 py-3 bg-custom-green text-white font-semibold rounded-lg shadow-md hover:bg-custom-green-dark focus:outline-none transition">
+                    Se connecter
+                </a>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="../js/inscription.js"></script>
+    <script type="module" src="../auth.js"></script>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Contrat - Bakéli Tontine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-gray-900 text-white min-h-screen">
+    <div class="p-4 text-2xl font-bold border-b border-gray-700">
+      <img src="../assets/img/logo.png" class="w-10 inline-block mr-2"> Bakéli Tontine
+    </div>
+    <nav class="mt-6">
+      <a href="dashboard.html" class="block py-3 px-4 hover:bg-gray-700"><i class="fa fa-coins mr-2"></i>Cotisations</a>
+      <a href="profil.html" class="block py-3 px-4 hover:bg-gray-700"><i class="fa fa-user mr-2"></i>Profil</a>
+      <a href="contrat.html" class="block py-3 px-4 bg-green-600"><i class="fa fa-file-contract mr-2"></i>Contrat</a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="flex-1 p-6">
+    <h1 class="text-2xl font-bold mb-6">Contrat d'Engagement</h1>
+
+    <div class="bg-white p-6 rounded-lg shadow">
+      <p><strong>Nom:</strong> <span id="nomContrat"></span></p>
+      <p><strong>Prénom:</strong> <span id="prenomContrat"></span></p>
+      <p class="mt-4">En tant que membre de la tontine Bakéli, je reconnais que :</p>
+      <ul class="list-disc ml-6 mt-2 space-y-1">
+        <li>J'ai accepté toutes les conditions d'adhésion.</li>
+        <li>Je m'engage à respecter les règles de fonctionnement.</li>
+        <li>Je suis responsable de mes contributions.</li>
+        <li>Tout manquement pourra entraîner des sanctions.</li>
+      </ul>
+    </div>
+  </main>
+
+  <script src="../js/firebase.js"></script>
+  <script src="../js/auth.js"></script>
+</body>
+</html>

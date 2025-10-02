@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Admin - Bakeli Tontine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="flex bg-gray-100">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-green-600 text-white min-h-screen p-6">
+    <h2 class="text-2xl font-bold mb-6">Admin Panel</h2>
+    <nav class="space-y-3">
+      <a href="dashboard.html" class="block py-2 px-3 rounded bg-green-700">📊 Tableau de bord</a>
+      <a href="utilisateurs.html" class="block py-2 px-3 rounded hover:bg-green-700">👥 Utilisateurs</a>
+      <a href="cotisations.html" class="block py-2 px-3 rounded hover:bg-green-700">💰 Cotisations</a>
+      <a href="archives.html" class="block py-2 px-3 rounded hover:bg-green-700">📂 Archives</a>
+      <a href="bloques.html" class="block py-2 px-3 rounded hover:bg-green-700">🚫 Bloqués</a>
+    </nav>
+    <button onclick="logout()" 
+      class="mt-6 w-full bg-red-500 py-2 rounded hover:bg-red-600">
+      Déconnexion
+    </button>
+  </aside>
+
+  <!-- Contenu -->
+  <main class="flex-1 p-6">
+    <h1 class="text-3xl font-bold mb-6">Tableau de bord</h1>
+
+    <!-- Statistiques -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <div class="bg-white shadow rounded-lg p-4">
+        <h3 class="text-lg font-semibold">Total Membres</h3>
+        <p id="totalUsers" class="text-2xl font-bold text-green-600">0</p>
+      </div>
+      <div class="bg-white shadow rounded-lg p-4">
+        <h3 class="text-lg font-semibold">Total Cotisations</h3>
+        <p id="totalCotisations" class="text-2xl font-bold text-green-600">0 CFA</p>
+      </div>
+      <div class="bg-white shadow rounded-lg p-4">
+        <h3 class="text-lg font-semibold">Membres bloqués</h3>
+        <p id="blockedUsers" class="text-2xl font-bold text-red-600">0</p>
+      </div>
+    </div>
+
+    <!-- Graphique -->
+    <div class="bg-white shadow rounded-lg p-6">
+      <h3 class="text-lg font-semibold mb-4">Cotisations par mois</h3>
+      <canvas id="cotisationsChart" height="100"></canvas>
+    </div>
+  </main>
+
+  <script type="module" src="../js/dasboard.js"></script>
+  <script type="module" src="../auth.js"></script>
+</body>
+</html>
