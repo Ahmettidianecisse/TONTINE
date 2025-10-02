@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paramètres</title>
+  <link rel="stylesheet" href="/css/dashordadmin.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body class="bg-gray-100">
+
+  <!-- Sidebar -->
+
+  <div id="sidebar" class="fixed inset-y-0 left-0 z-40 w-64 transform -translate-x-full md:translate-x-0 transition-transform duration-300 bg-[#0A3545] flex flex-col">
+    <div class="flex items-center justify-center h-16 border-b border-gray-700">
+      <span class="text-white font-bold uppercase">Bakeli Tontine</span>
+    </div>
+
+<nav class="flex-1 px-2 py-4 overflow-y-auto">
+  <a href="dasboard.html" class="flex items-center px-4 py-2 text-gray-100 hov rounded">
+    <i class="bi bi-list mr-2"></i> Dashboard
+  </a>
+  <a href="Utilisateur.html" class="flex items-center px-4 py-2 mt-2 text-gray-100 hov rounded">
+    <i class="bi bi-person mr-2"></i> Utilisateur
+  </a>
+  <a href="cotisation.html" class="flex items-center px-4 py-2 mt-2 text-gray-100 hov rounded">
+    <i class="bi bi-currency-dollar mr-2"></i> Cotisation
+  </a>
+
+  <div class="text-white mt-2">
+    <button onclick="toggleMenu()" class="flex items-center justify-between w-full px-4 py-2 hov rounded">
+      <span class="flex items-center gap-2 hov">⚙️ Paramètres</span>
+      <span id="arrow" class="transition-transform"><i class="bi bi-caret-down-fill"></i></span>
+    </button>
+    <!-- Sous-menu -->
+    <div id="submenu" class="hidden flex-col ml-6">
+      <a href="parametre.html" class="block px-4 py-2 hov rounded">Paramètres Généraux</a>
+      <a href="utilisateurparametre.html" class="block px-4 py-2 hov rounded">Utilisateurs</a>
+      <a href="archives.html" class="block px-4 py-2 hov rounded">Archives</a>
+      <a href="bloques.html" class="block px-4 py-2 hov rounded">Membres Bloqués</a>
+    </div>
+  </div>
+</nav>
+  </div>
+
+  <!-- Contenu principal -->
+
+  <div class="flex-1 flex flex-col md:ml-64">
+<!-- Header -->
+<div class="flex items-center justify-between p-4 bg-white shadow-md">
+  <button id="menu-btn" class="md:hidden text-gray-800 text-2xl">
+    <i class="bi bi-list"></i>
+  </button>
+  <h1 class="text-2xl font-bold">Paramètres</h1>
+</div>
+
+<!-- Section Profil -->
+<section class="p-6">
+  <h1 class="text-center text-2xl mb-6">Paramètres généraux</h1>
+  <div class="flex flex-col md:flex-row gap-6 md:place-content-evenly">
+
+    <!-- Profil utilisateur -->
+    <div class="border-b md:border-r md:border-b-0 border-gray-500 p-4 text-center md:w-1/3">
+      <p class="font-semibold">Profil</p>
+      <img src="istockphoto-1300845620-612x612.jpg" alt="Profil" class="mx-auto w-24 rounded-full">
+      <h2 class="mt-2 font-bold">Nogaye Ndao</h2>
+
+      <!-- Bouton pour ouvrir le modal -->
+      <div class="mt-4">
+        <button id="openModal" class=" bg-[#0A3545] text-white px-4 py-2 rounded shadow">
+          Éditer Profil
+        </button>
+      </div>
+    </div>
+
+    <!-- Infos généraux -->
+    <div class="md:w-2/3">
+      <h4 class="bg-green-500 text-white p-2">Infos Généraux</h4>
+      <table class="w-full max-w-md border-collapse">
+        <tbody>
+          <tr class="border-b border-gray-400">
+            <td class="p-2">Prénom</td>
+            <td class="p-2 text-right">Nogaye</td>
+          </tr>
+          <tr class="border-b border-gray-400">
+            <td class="p-2">Nom</td>
+            <td class="p-2 text-right">Ndao</td>
+          </tr>
+          <tr class="border-b border-gray-400">
+            <td class="p-2">Statut</td>
+            <td class="p-2 text-right">Administrateur</td>
+          </tr>
+          <tr class="border-b border-gray-400">
+            <td class="p-2">E-mail</td>
+            <td class="p-2 text-right">nogayendao2020@gmail.com</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4 class="bg-green-500 text-white p-2 mt-4">Statistiques</h4>
+      <table class="w-full max-w-md border-collapse">
+        <tbody>
+          <tr class="border-b border-gray-400">
+            <td class="p-2">Membres Ajoutés</td>
+            <td class="p-2 text-right">0</td>
+          </tr>
+          <tr class="border-b border-gray-400">
+            <td class="p-2">Membres Bloqués</td>
+            <td class="p-2 text-right">0</td>
+          </tr>
+          <tr class="border-b border-gray-400">
+            <td class="p-2">Membres Archivés</td>
+            <td class="p-2 text-right">0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+  </div>
+
+  <!-- Modal -->
+
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-50">
+    <div class="bg-white w-full max-w-[95%] sm:w-[700px] rounded-xl shadow-lg p-6 relative">
+  <!-- Bouton fermer -->
+  <button id="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl">✖</button>
+
+  <h2 class="text-2xl font-bold text-center mb-6">Éditer profil</h2>
+
+  <!-- Formulaire -->
+  <form class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div>
+      <label class="block text-sm">Nom</label>
+      <input type="text" class="w-full border rounded p-2" value="Ndao">
+    </div>
+    <div>
+      <label class="block text-sm">Prénom</label>
+      <input type="text" class="w-full border rounded p-2" value="Nogaye">
+    </div>
+    <div>
+      <label class="block text-sm">Téléphone</label>
+      <input type="tel" class="w-full border rounded p-2" placeholder="+221 77 000 00 00">
+    </div>
+    <div>
+      <label class="block text-sm">E-mail</label>
+      <input type="email" class="w-full border rounded p-2" value="nogayendao2020@gmail.com">
+    </div>
+    <div>
+      <label class="block text-sm">Statut</label>
+      <input type="text" class="w-full border rounded p-2" value="Administrateur">
+    </div>
+  </form>
+
+  <div class="mt-6 text-center">
+    <button class="bg-green-500 text-white px-8 py-2 rounded-lg shadow hover:bg-green-600">
+      Enregistrer
+    </button>
+  </div>
+</div>
+</div>
+
+  <script src="/js/parametre.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archives</title>
+    <link rel="stylesheet" href="/css/dashordadmin.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav>
+  <div id="sidebar" class="fixed inset-y-0 left-0 z-40 w-64 transform -translate-x-full md:translate-x-0 transition-transform bg-[#0A3545] flex flex-col">
+    
+    <div class="flex items-center justify-center h-16 border-b border-gray-700">
+      <span class="text-white font-bold uppercase">Bakeli Tontine</span>
+    </div>
+
+    <nav class="flex-1 px-2 py-4 overflow-y-auto">
+      <a href="dasboard.html" class="flex items-center px-4 py-2 text-gray-100 hov">
+        <i class="bi bi-list h-6 w-6 mr-2"></i>
+        Dashboard
+      </a>
+      <a href="Utilisateur.html" class="flex items-center px-4 py-2 mt-2 text-gray-100 hov">
+        <i class="bi bi-person h-6 w-6 mr-2"></i>
+        Utilisateur
+      </a>
+      <a href="cotisation.html" class="flex items-center px-4 py-2 mt-2 text-gray-100 hov">
+        <i class="bi bi-currency-dollar h-6 w-6 mr-2"></i>
+        Cotisation
+      </a>
+
+      <div class="text-white">
+        <button onclick="toggleMenu()" class="flex items-center justify-between w-full px-4 py-2 hov">
+          <span class="flex items-center gap-2 hov">⚙️ Paramètres</span>
+          <span id="arrow" class="transition-transform"><i class="bi bi-caret-down-fill"></i></span>
+        </button>
+
+        <!-- Sous-menu -->
+        <div id="submenu" class="hidden flex-col ml-6 text-white">
+          <a href="parametregeneraux.html" class="px-4 py-2 hov">Paramètres Généraux</a><br><br>
+          <a href="utilisateurpara.html" class="px-4 py-2 hov">Utilisateurs</a><br><br>
+          <a href="archives.html" class="px-4 py-2 hov">Archives</a><br><br>
+          <a href="bloques.html" class="px-4 py-2 hov">Membres Bloqués</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</nav>
+    <div class="flex-1 flex flex-col md:ml-64">
+    <div class="flex items-center justify-between p-4 bg-white shadow-md">
+        <button id="menu-btn" class="md:hidden text-gray-800 text-2xl">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+
+      <div class="bg-white shadow-lg rounded-xl p-8 w-full max-w-4xl ">
+        <h1>Parametre utilisateur</h1>
+    <h2 class="text-2xl font-semibold mb-6 text-gray-800">Information Générale</h2>
+
+    <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <!-- Nom -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Nom</label>
+        <input type="text" placeholder="Nogaye" 
+               class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-green-500 outline-none">
+      </div>
+
+      <!-- Prénom -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Prénom</label>
+        <input type="text" placeholder="Ndao" 
+               class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-green-500 outline-none">
+      </div>
+
+      <!-- Date de naissance -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Date de naissance</label>
+        <input type="date" 
+               class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-green-500 outline-none">
+      </div>
+
+      <!-- Profession -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Profession</label>
+        <input type="text" placeholder="Designer" 
+               class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-green-500 outline-none">
+      </div>
+
+      <!-- Mot de passe -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Définir mot de passe</label>
+        <input type="password" 
+               class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-green-500 outline-none">
+      </div>
+
+      <!-- Confirmer mot de passe -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Confirmer votre mot de passe</label>
+        <input type="password" 
+               class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-green-500 outline-none">
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">E-mail</label>
+        <input type="email" placeholder="selenaroy98@gmail.com" 
+               class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-green-500 outline-none">
+      </div>
+
+      <!-- Téléphone -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Téléphone</label>
+        <input type="tel" placeholder="+221 77 250 11 22" 
+               class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-green-500 outline-none">
+      </div>
+
+      <!-- Adresse -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Adresse</label>
+        <input type="text" placeholder="HLM Grand Yoff, Dakar" 
+               class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-green-500 outline-none">
+      </div>
+
+      <!-- Organisation -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Organisation</label>
+        <input type="text" placeholder="Volkeno" 
+               class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-green-500 outline-none">
+      </div>
+    </form>
+
+    <!-- Bouton -->
+    <div class="mt-8 text-right">
+      <button type="submit" 
+              class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg shadow-md">
+        Mettre à jour
+      </button>
+    </div>
+  </div>
+<script src="/js/parametre.js"></script>
+</body>
+</html>
