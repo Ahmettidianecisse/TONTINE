@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utilisateur</title>
+  <link rel="stylesheet" href="/css/dashordadmin.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <nav>
+    <div id="sidebar" class="fixed inset-y-0 left-0 z-40 w-64 transform -translate-x-full md:translate-x-0 transition-transform bg-[#0A3545] flex flex-col over">
+      <div class="flex items-center justify-center h-16 border-b border-gray-700">
+        <span class="text-white font-bold uppercase">Bakeli Tontine</span>
+      </div>
+
+      <nav class="flex-1 px-2 py-4 overflow-y-auto">
+        <a href="dasboard.html" class="flex items-center px-4 py-2 text-gray-100 hov">
+          <i class="bi bi-list h-6 w-6 mr-2"></i>
+          Dashboard
+        </a>
+        <a href="Utilisateur.html" class="flex items-center px-4 py-2 mt-2 text-gray-100 hov">
+          <i class="bi bi-person h-6 w-6 mr-2"></i>
+          Utilisateur
+        </a>
+        <a href="cotisation.html" class="flex items-center px-4 py-2 mt-2 text-gray-100 hov">
+          <i class="bi bi-currency-dollar h-6 w-6 mr-2"></i>
+          Cotisation
+        </a>
+
+        <div class="text-white">
+          <button onclick="toggleMenu()" class="flex items-center justify-between w-full px-4 py-2 hov">
+            <span class="flex items-center gap-2">⚙️ Paramètres</span>
+            <span id="arrow" class="transition-transform"><i class="bi bi-caret-down-fill"></i></span>
+          </button>
+
+          <!-- Sous-menu -->
+          <div id="submenu" class="hidden flex-col ml-6">
+            <a href="parametre.html" class="block px-4 py-2 hov">Paramètres Généraux</a>
+            <a href="utilisateurparametre.html" class="block px-4 py-2 hov">Utilisateurs</a>
+            <a href="archives.html" class="block px-4 py-2 hov">Archives</a>
+            <a href="bloques.html" class="block px-4 py-2 hov">Membres Bloqués</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </nav>
+
+  <!-- Contenu principal -->
+  <div class="flex-1 flex flex-col md:ml-64">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between p-4 bg-white shadow-md">
+      <button id="menu-btn" class="md:hidden text-gray-800 text-2xl">
+        <i class="bi bi-list"></i>
+      </button>
+      <h1 class="text-2xl font-bold">Cotisation</h1>
+    </div>
+
+    <div class="grid gap-6 p-6">
+      <!-- Cartes -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="shadow-lg bg-white text-center p-8 text-sm rounded-xl hov" id="actifs"> 
+          <h5>Juin</h5>
+          <h1>0 CFA</h1>
+        </div>
+        <div class="shadow-lg bg-white text-center p-8 text-sm rounded-xl hov" id="bloques"> 
+         <h5>Mai</h5>
+         <h1>0 CFA</h1>
+        </div>
+        <div class="shadow-lg bg-white text-center p-8 text-sm rounded-xl hov" id="tous"> 
+          <h5>Total Caisse</h5>
+          <h1>0 CFA</h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tableau -->
+    <div class="p-6 overflow-x-auto">
+      <table class="table-auto w-full border rounded-xl shadow-lg text-sm">
+        <thead class="bg-green-500 text-white">
+          <tr>
+            <th class="p-2">Membre</th>
+            <th class="p-2">Date début</th>
+            <th class="p-2">Seuil</th>
+            <th class="p-2">Progression</th>
+            <th class="p-2">Statut</th>
+          </tr>
+        </thead>
+        <tbody id="table-body" class="text-center">
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="/js/cotisation.js"></script>
+</body>
+</html>

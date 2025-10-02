@@ -1,0 +1,29 @@
+.hov:hover{
+    background-color: #20DF7F;
+    color: white;
+    font-weight: bold;
+}
+
+.chart-box{
+    width: 45%;
+}
+.charts-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    
+}
+.h2-color{
+    background-color: #20DF7F;
+    color: #0A3545;
+}
+.bar{
+    color: #20DF7F;
+}
+.bar1{
+    color: #0A3545;
+}
+.bar2{
+    background-color: #0A3545;
+}
