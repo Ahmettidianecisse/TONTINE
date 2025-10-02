@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Include this script tag or install `@tailwindplus/elements` via npm: -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1"
+      type="module"
+    ></script>
+    <title>Dashboard Bakéli Tontine</title>
+  </head>
+  <body class="bg-gradient-to-r from-blue-100 via-purple-500 to-slate-400">
+    <div class="flex h-screen overflow-hidden">
+      <!-- Sidebar -->
+      <div
+        id="sidebar"
+        class="fixed inset-y-0 left-0 bg-[#093545] w-64 transform -translate-x-full md:translate-x-0 transition-transform z-50"
+      >
+        <div class="flex justify-between items-center px-4 py-5 md:py-10">
+          <div class="flex items-center gap-3">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              color="white"
+              style="margin-top: 5px"
+              fill="currentColor"
+              class="bi bi-cash-coin"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8m5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0"
+              />
+              <path
+                d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195z"
+              />
+              <path
+                d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083q.088-.517.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1z"
+              />
+              <path
+                d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 6 6 0 0 1 3.13-1.567"
+              />
+            </svg>
+            <a href="index.html"
+              ><h1 class="text-white text-2xl font-semibold">
+                Bakéli Tontine
+              </h1></a
+            >
+          </div>
+          <button id="close-sidebar" class="md:hidden text-white text-3xl">
+            &times;
+          </button>
+        </div>
+
+        <nav class="mt-10 flex flex-col gap-4 text-white text-lg px-5">
+          <a
+            href="dasboard-user.html"
+            class="flex items-center gap-3 py-2 hover:bg-[#064a59] rounded"
+            id="rek"
+          >
+            <i class="bi bi-cash-coin text-2xl"></i> Cotisations
+          </a>
+          <a
+            href="profil.html"
+            class="flex items-center gap-3 py-2 hover:bg-[#064a59] rounded"
+            id="rek"
+          >
+            <i class="bi bi-person-fill text-2xl"></i> Profil
+          </a>
+          <a
+            href="contrat.html"
+            class="flex items-center gap-3 py-2 hover:bg-[#064a59] rounded"
+            id="rek"
+          >
+            <i class="bi bi-clipboard2-check-fill text-2xl"></i> Contrat
+          </a>
+        </nav>
+      </div>
+
+      <!-- Overlay mobile -->
+      <div
+        id="overlay"
+        class="fixed inset-0 bg-opacity-50 hidden z-40 md:hidden"
+      ></div>
+
+      <!-- Bouton hamburger pour mobile -->
+      <!-- <button id="open-sidebar" class="md:hidden fixed top-4 left-4 z-50 p-2  rounded-md shadow">
+  <i class="bi bi-list text-2xl text-gray-700"></i>
+  
+</button> -->
+      <button
+        id="open-sidebar"
+        class="md:hidden text-3xl fixed top-7 left-7 z-50 p-2text-gray-700"
+      >
+        <i class="bi bi-list text-2xl text-gray-700"></i>
+      </button>
+
+      <!-- Main content -->
+      <div class="flex-1 flex flex-col md:ml-64">
+        <!-- Header -->
+        <div
+          class="bg-white shadow px-4 py-4 sticky top-0 left-20px bg-blue-400z-30 w-[100] md:w-full flex justify-between items-center"
+        >
+          <div
+            class="flex justify-between items-center w-[90%] sm:w-full ml-24 sm:mx-0 sm:static"
+          >
+            <h1 class="text-xl md:text-2xl font-semibold">User Dashboard</h1>
+            <div class="flex items-center gap-3">
+              <i class="bi bi-bell text-2xl"></i>
+              <div
+                class="flex items-center space-x-3 cursor-pointer hover:bg-gray-100 p-2 rounded-lg"
+              >
+                <img
+                  src="https://i.pinimg.com/736x/5d/b7/39/5db7399a4c24dc4515bcff4f48b9b7e9.jpg"
+                  alt="Avatar"
+                  class="w-10 h-10 rounded-full object-cover"
+                />
+                <div class="flex flex-col">
+                  <span class="font-semibold text-gray-900 text-sm md:text-lg"
+                    >Ahmet Tidiane Cissé</span
+                  >
+                  <span class="text-gray-500 text-xs md:text-sm"
+                    >Utilisateur</span
+                  >
+                </div>
+
+                <el-dropdown class="inline-block">
+                  <button
+                    class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow hover:bg-gray-100"
+                  >
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      data-slot="icon"
+                      aria-hidden="true"
+                      class="-mr-1 size-5 text-gray-400"
+                    >
+                      <path
+                        d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                        clip-rule="evenodd"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+
+                  <el-menu
+                    anchor="bottom end"
+                    popover
+                    class="w-56 origin-top-right rounded-md bg-white shadow-lg outline-1 outline-black/5 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+                  >
+                    <div class="py-1 flex flex-col">
+                      <!-- debut modal contact -->
+
+                      <button
+                        type="button"
+                        onclick="document.getElementById('contactModal').classList.remove('hidden')"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md text-center"
+                      >
+                        Contacter
+                      </button>
+
+                      <!-- Modal -->
+                      <div
+                        id="contactModal"
+                        class="hidden fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+                      >
+                        <div
+                          class="bg-green-50 rounded-3xl shadow-2xl w-full max-w-md p-8 border-2 border-green-200 text-center"
+                        >
+                          <h2 class="text-2xl font-bold mb-6 text-green-800">
+                            Comment souhaitez-vous contacter ?
+                          </h2>
+
+                          <div class="mt-4 flex flex-col gap-3">
+                            <button
+                              onclick="window.location.href='mailto:cisseahmettidiane@gmail.com'; alert('Contact via Mail en cours')"
+                              class="px-4 py-2 rounded-2xl bg-blue-600 text-white hover:bg-blue-500 transition duration-200"
+                            >
+                              Mail
+                            </button>
+
+                            <button
+                              onclick="window.location.href='tel:+221764696605'; alert('Contact via Numéro de téléphone en cours')"
+                              class="px-4 py-2 rounded-2xl bg-green-600 text-white hover:bg-green-500 transition duration-200"
+                            >
+                              Numéro de téléphone
+                            </button>
+                          </div>
+
+                          <!-- Bouton fermer -->
+                          <button
+                            onclick="document.getElementById('contactModal').classList.add('hidden')"
+                            class="mt-6 px-4 py-2 rounded-2xl bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-200"
+                          >
+                            Annuler
+                          </button>
+                        </div>
+                      </div>
+
+                      <!-- Bouton Déconnexion -->
+                      <button
+                        type="button"
+                        onclick="document.getElementById('logoutModal').classList.remove('hidden')"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md text-center"
+                      >
+                        Déconnexion
+                      </button>
+
+                      <!-- Modal -->
+                      <div
+                        id="logoutModal"
+                        class="hidden fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+                      >
+                        <div
+                          class="bg-green-50 rounded-3xl shadow-2xl w-full max-w-md p-8 border-2 border-green-200 text-center"
+                        >
+                          <h2 class="text-2xl font-bold mb-6 text-green-800">
+                            Se déconnecter ?
+                          </h2>
+                          <p class="text-sm text-gray-600 mb-6">
+                            Êtes-vous sûr de vouloir vous déconnecter ?
+                          </p>
+
+                          <div class="flex justify-center gap-4">
+                            <button
+                              onclick="document.getElementById('logoutModal').classList.add('hidden')"
+                              class="px-6 py-2 rounded-2xl bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-200"
+                            >
+                              Annuler
+                            </button>
+
+                            <button
+                              onclick="alert('Vous êtes déconnecté !'); document.getElementById('logoutModal').classList.add('hidden'); window.location.href='profil.html';"
+                              class="px-6 py-2 rounded-2xl bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-200"
+                            >
+                              Confirmer
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- fin du modal  -->
+                    </div>
+                  </el-menu>
+                </el-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scrollable content -->
+        <div class="flex-1 overflow-y-auto p-4 md:p-6 space-y-6">
+          <!-- Sections -->
+          <div class="bg-white rounded-xl shadow overflow-hidden">
+            <div class="bg-[#20df7f] text-white font-semibold px-4 py-2">
+              Informations personnelles
+            </div>
+            <div class="p-4 space-y-2 text-gray-700 text-sm md:text-base">
+              <p><span class="font-medium">Nom complet :</span> ...</p>
+              <p><span class="font-medium">Photo de profil :</span> ...</p>
+              <p><span class="font-medium">Email / Téléphone :</span> ...</p>
+              <p><span class="font-medium">Adresse :</span> ...</p>
+              <p><span class="font-medium">Mot de passe :</span> ********</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow overflow-hidden">
+            <div class="bg-[#20df7f] text-white font-semibold px-4 py-2">
+              Statut et rôle
+            </div>
+            <div class="p-4 space-y-2 text-gray-700 text-sm md:text-base">
+              <p>
+                <span class="font-medium">Rôle :</span> Administrateur / Membre
+              </p>
+              <p><span class="font-medium">Statut :</span> Actif / Suspendu</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow overflow-hidden">
+            <div class="bg-[#20df7f] text-white font-semibold px-4 py-2">
+              Informations financières
+            </div>
+            <div class="p-4 space-y-2 text-gray-700 text-sm md:text-base">
+              <p>
+                <span class="font-medium">Cotisations totales versées :</span>
+                ...
+              </p>
+              <p>
+                <span class="font-medium">Cotisations en attente :</span> ...
+              </p>
+              <p><span class="font-medium">Prochaine échéance :</span> ...</p>
+              <p><span class="font-medium">Solde :</span> ...</p>
+              <p class="font-medium">Historique des paiements :</p>
+              <ul class="list-disc list-inside">
+                <li>...</li>
+                <li>...</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow overflow-hidden">
+            <div class="bg-[#20df7f] text-white font-semibold px-4 py-2">
+              Sécurité et paramètres
+            </div>
+            <div class="p-4 flex flex-col md:flex-row gap-3">
+              <button
+                class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300"
+              >
+                Modifier mot de passe
+              </button>
+              <button
+                class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300"
+              >
+                Activer 2FA
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow overflow-hidden">
+            <div class="bg-[#20df7f] text-white font-semibold px-4 py-2">
+              Actions rapides
+            </div>
+            <div class="p-4 flex flex-wrap gap-3">
+              <a href="">
+                <div
+                  class="px-4 py-2 bg-[#20df7f] text-white rounded-lg hover:bg-[#17c76e]"
+                >
+                  Payer ma cotisation
+                </div></a
+              >
+              <a href="">
+                <div
+                  class="px-4 py-2 bg-[#20df7f] text-white rounded-lg hover:bg-[#17c76e]"
+                >
+                  Voir mon historique
+                </div></a
+              >
+              <a href="">
+                <div
+                  class="px-4 py-2 bg-[#20df7f] text-white rounded-lg hover:bg-[#17c76e]"
+                >
+                  Contacter l’admin
+                </div></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS pour sidebar mobile -->
+    <script>
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("overlay");
+      const openBtn = document.getElementById("open-sidebar");
+      const closeBtn = document.getElementById("close-sidebar");
+
+      openBtn.addEventListener("click", () => {
+        sidebar.classList.remove("-translate-x-full");
+        overlay.classList.remove("hidden");
+      });
+
+      closeBtn.addEventListener("click", () => {
+        sidebar.classList.add("-translate-x-full");
+        overlay.classList.add("hidden");
+      });
+
+      overlay.addEventListener("click", () => {
+        sidebar.classList.add("-translate-x-full");
+        overlay.classList.add("hidden");
+      });
+    </script>
+    <script type="module" src="../js/userDashboard.js"></script>
+    <script type="module" src="../auth.js"></script>
+  </body>
+</html>
