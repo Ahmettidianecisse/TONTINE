@@ -10,44 +10,37 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <nav>
-  <div id="sidebar" class="fixed inset-y-0 left-0 z-40 w-64 transform -translate-x-full md:translate-x-0 transition-transform bg-[#0A3545] flex flex-col">
-    
+    <div id="sidebar" class="fixed inset-y-0 left-0 z-40 w-64 transform -translate-x-full md:translate-x-0 transition-transform duration-300 bg-[#0A3545] flex flex-col">
     <div class="flex items-center justify-center h-16 border-b border-gray-700">
       <span class="text-white font-bold uppercase">Bakeli Tontine</span>
     </div>
 
-    <nav class="flex-1 px-2 py-4 overflow-y-auto">
-      <a href="dasboard.html" class="flex items-center px-4 py-2 text-gray-100 hov">
-        <i class="bi bi-list h-6 w-6 mr-2"></i>
-        Dashboard
-      </a>
-      <a href="Utilisateur.html" class="flex items-center px-4 py-2 mt-2 text-gray-100 hov">
-        <i class="bi bi-person h-6 w-6 mr-2"></i>
-        Utilisateur
-      </a>
-      <a href="cotisation.html" class="flex items-center px-4 py-2 mt-2 text-gray-100 hov">
-        <i class="bi bi-currency-dollar h-6 w-6 mr-2"></i>
-        Cotisation
-      </a>
+<nav class="flex-1 px-2 py-4 overflow-y-auto">
+  <a href="dasboard.html" class="flex items-center px-4 py-2 text-gray-100 hov rounded">
+    <i class="bi bi-list mr-2"></i> Dashboard
+  </a>
+  <a href="Utilisateur.html" class="flex items-center px-4 py-2 mt-2 text-gray-100 hov rounded">
+    <i class="bi bi-person mr-2"></i> Utilisateur
+  </a>
+  <a href="cotisation.html" class="flex items-center px-4 py-2 mt-2 text-gray-100 hov rounded">
+    <i class="bi bi-currency-dollar mr-2"></i> Cotisation
+  </a>
 
-      <div class="text-white">
-        <button onclick="toggleMenu()" class="flex items-center justify-between w-full px-4 py-2 hov">
-          <span class="flex items-center gap-2 hov">⚙️ Paramètres</span>
-          <span id="arrow" class="transition-transform"><i class="bi bi-caret-down-fill"></i></span>
-        </button>
-
-        <!-- Sous-menu -->
-        <div id="submenu" class="hidden flex-col ml-6 text-white">
-          <a href="parametregeneraux.html" class="px-4 py-2 hov">Paramètres Généraux</a><br><br>
-          <a href="utilisateurpara.html" class="px-4 py-2 hov">Utilisateurs</a><br><br>
-          <a href="archives.html" class="px-4 py-2 hov">Archives</a><br><br>
-          <a href="bloques.html" class="px-4 py-2 hov">Membres Bloqués</a>
-        </div>
-      </div>
-    </nav>
+  <div class="text-white mt-2">
+    <button onclick="toggleMenu()" class="flex items-center justify-between w-full px-4 py-2 hov rounded">
+      <span class="flex items-center gap-2 hov">⚙️ Paramètres</span>
+      <span id="arrow" class="transition-transform"><i class="bi bi-caret-down-fill"></i></span>
+    </button>
+    <!-- Sous-menu -->
+    <div id="submenu" class="hidden flex-col ml-6">
+      <a href="parametre.html" class="block px-4 py-2 hov rounded">Paramètres Généraux</a>
+      <a href="utilisateurparametre.html" class="block px-4 py-2 hov rounded">Utilisateurs</a>
+      <a href="archives.html" class="block px-4 py-2 hov rounded">Archives</a>
+      <a href="bloques.html" class="block px-4 py-2 hov rounded">Membres Bloqués</a>
+    </div>
   </div>
 </nav>
+  </div>
     <div class="flex-1 flex flex-col md:ml-64">
     <div class="flex items-center justify-between p-4 bg-white shadow-md">
         <button id="menu-btn" class="md:hidden text-gray-800 text-2xl">

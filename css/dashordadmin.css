@@ -27,3 +27,7 @@
 .bar2{
     background-color: #0A3545;
 }
+
+
+.hov:hover { background-color: #20DF7F; color: white; }
+    .box-active { background-color: #20DF7F !important; color: white; }
