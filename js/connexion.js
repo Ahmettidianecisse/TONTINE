@@ -7,7 +7,7 @@ import { doc, getDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-
 // --- LOGIQUE DE REDIRECTION BASÉE SUR LE RÔLE ---
 async function redirectBasedOnRole(uid) {
     try {
-        const userDocRef = doc(db, "users", uid);
+          const userDocRef = doc(db, "users", uid);
         const docSnap = await getDoc(userDocRef);
 
         if (docSnap.exists()) {
@@ -19,7 +19,7 @@ async function redirectBasedOnRole(uid) {
                 window.location.href = "../user/dasboard-user.html";
             }
         } else {
-            alert("⚠️ Profil utilisateur introuvable dans Firestore. Déconnexion.");
+            alert("⚠️ Profil utilisateur introuvable dans la base de donné .");
             await signOut(auth);
             window.location.href = "index.html";
         }

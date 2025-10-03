@@ -550,7 +550,9 @@
       </div> -->
 
     <!-- Config chart  -->
-    <script>
+    <script type="module">
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+    import { redirectBasedOnRole } from "../connexion.js"; // adapte le chemin selon ton projet
       // Line chart (évolution des cotisations)
       const lineCtx = document.getElementById("lineCanvas").getContext("2d");
       const lineChart = new Chart(lineCtx, {
@@ -658,6 +660,12 @@
           document.getElementById("paymentModal").classList.add("hidden");
         }
       });
+
+
+
+      // Nom de l'tilisateur
+       const userInfo = await redirectBasedOnRole(user.uid)
+       
   
     </script>
      <script type="module" src="../js/userDashboard.js"></script>

@@ -1,143 +1,129 @@
+// ======================
+// Données simulées
+// ======================
+let membres = [
+  { membre: "Selena Roy", statut: "Actif", date: "01-03-2022", seuil: 50, progression: 40 },
+  { membre: "Fatou Ndiaye", statut: "Bloqué", date: "05-03-2022", seuil: 30, progression: 20 },
+  { membre: "Aliou Diop", statut: "Actif", date: "08-03-2022", seuil: 70, progression: 70 },
+];
 
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+// ======================
+// Sélection des éléments
+// ======================
+const boxActifs = document.getElementById("box-actifs");
+const boxBloques = document.getElementById("box-bloques");
+const boxTous = document.getElementById("box-tous");
+const boxes = [boxActifs, boxBloques, boxTous];
+const tbody = document.getElementById("table-body");
 
-    // Config Firebase
-    const firebaseConfig = {
-      apiKey: "AIzaSyDayay9CL8GRjxKjyupEOvOhrb1Suuh-jw",
-      authDomain: "tontine-9ea4a.firebaseapp.com",
-      databaseURL: "https://tontine-9ea4a-default-rtdb.firebaseio.com",
-      projectId: "tontine-9ea4a",
-      storageBucket: "tontine-9ea4a.appspot.com",
-      messagingSenderId: "855693297703",
-      appId: "1:855693297703:web:ff841c9933757b57702602"
-    };
+// Modal
+const modal = document.getElementById("modal");
+const openModal = document.getElementById("openModal");
+const closeModal = document.getElementById("closeModal");
+const ajouterBtn = document.getElementById("ajouterMembre");
+const form = document.getElementById("formMembre");
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+// ======================
+// Fonctions localStorage
+// ======================
+function saveToLocalStorage() {
+  localStorage.setItem("membres", JSON.stringify(membres));
+}
 
-    // Sidebar
-    const btn = document.getElementById('menu-btn');
-    const sidebar = document.getElementById('sidebar');
-    btn.addEventListener('click', () => sidebar.classList.toggle('-translate-x-full'));
+function loadFromLocalStorage() {
+  const data = localStorage.getItem("membres");
+  if (data) {
+    membres = JSON.parse(data);
+  }
+}
 
-    // Modal
-    const modal = document.getElementById("modal");
-    const openModal = document.getElementById("openModal");
-    const closeModal = document.getElementById("closeModal");
-    openModal.addEventListener("click", () => modal.classList.remove("hidden"));
-    closeModal.addEventListener("click", () => modal.classList.add("hidden"));
-    window.addEventListener("click", (e) => { if (e.target === modal) modal.classList.add("hidden"); });
+// ======================
+// Fonctions principales
+// ======================
+function remplirTableau(filtre = "Tous") {
+  tbody.innerHTML = "";
+  let data = membres;
+  if (filtre === "Actif") data = membres.filter(m => m.statut === "Actif");
+  if (filtre === "Bloqué") data = membres.filter(m => m.statut === "Bloqué");
 
-    function toggleMenu() {
-      const submenu = document.getElementById("submenu");
-      const arrow = document.getElementById("arrow");
-      submenu.classList.toggle("hidden");
-      arrow.classList.toggle("rotate-180");
-    }
+  data.forEach(m => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td class="p-2">${m.membre}</td>
+      <td class="p-2">${m.date}</td>
+      <td class="p-2">${m.seuil}%</td>
+      <td class="p-2">
+        <div class="w-full bg-gray-200 rounded-full h-2">
+          <div class="bg-green-500 h-2 rounded-full" style="width:${m.progression}%"></div>
+        </div>
+      </td>
+      <td class="p-2">${m.statut}</td>
+    `;
+    tbody.appendChild(row);
+  });
 
-    // Tableau
-    let membres = [];
+  // Mettre à jour les compteurs
+  boxActifs.innerText = `Membres Actifs: ${membres.filter(m => m.statut === "Actif").length}`;
+  boxBloques.innerText = `Membres Bloqués: ${membres.filter(m => m.statut === "Bloqué").length}`;
+  boxTous.innerText = `Total Effectif: ${membres.length}`;
+}
 
-    // Compteurs
-    function mettreAJourCompteurs() {
-      const actifs = membres.filter(m => m.Statut === "Actif").length;
-      const bloques = membres.filter(m => m.Statut === "Bloqué").length;
-      const total = membres.length;
+function setActiveBox(selectedBox) {
+  boxes.forEach(b => b.classList.remove("box-active"));
+  selectedBox.classList.add("box-active");
+}
 
-      document.getElementById("actifs").textContent = `Membres Actifs: ${actifs}`;
-      document.getElementById("bloques").textContent = `Membres Bloqués: ${bloques}`;
-      document.getElementById("tous").textContent = `Total Effectif: ${total}`;
-    }
+// ======================
+// Gestion box clic
+// ======================
+boxActifs.addEventListener("click", () => { remplirTableau("Actif"); setActiveBox(boxActifs); });
+boxBloques.addEventListener("click", () => { remplirTableau("Bloqué"); setActiveBox(boxBloques); });
+boxTous.addEventListener("click", () => { remplirTableau("Tous"); setActiveBox(boxTous); });
 
-    function afficherTableau(filtre) {
-      const tbody = document.getElementById("table-body");
-      tbody.innerHTML = "";
+// ======================
+// Gestion modal
+// ======================
+openModal.addEventListener("click", () => modal.classList.remove("hidden"));
+closeModal.addEventListener("click", () => modal.classList.add("hidden"));
 
-      const filtres = membres.filter(m => filtre === "Tous" ? true : m.Statut === filtre);
+// ======================
+// Ajouter un membre
+// ======================
+ajouterBtn.addEventListener("click", () => {
+  const nom = document.getElementById("nom").value.trim();
+  const prenom = document.getElementById("prenom").value.trim();
+  const date = document.getElementById("dateDebut").value;
+  const statut = document.getElementById("statut").value;
 
-      filtres.forEach((m, index) => {
-        tbody.innerHTML += `
-          <tr class="border">
-            <td class="p-2">${m.nom}</td>
-            <td class="p-2">${m.date}</td>
-            <td class="p-2">${m.Seuil}</td>
-            <td class="p-2">${m.Progression}</td>
-            <td class="p-2">
-              <button class="toggleStatut ${m.Statut === 'Actif' ? 'text-green-500' : 'text-red-500'}" data-id="${m.id}">
-                ${m.Statut}
-              </button>
-            </td>
-          </tr>
-        `;
-      });
+  if (!nom || !prenom || !date) {
+    alert("Veuillez remplir tous les champs !");
+    return;
+  }
 
-      // Ajouter la fonctionnalité de changement de statut
-      document.querySelectorAll(".toggleStatut").forEach(btn => {
-        btn.addEventListener("click", async () => {
-          const index = membres.findIndex(m => m.id === btn.dataset.id);
-          if (index !== -1) {
-            const m = membres[index];
-            const nouveauStatut = m.Statut === "Actif" ? "Bloqué" : "Actif";
-            // Mettre à jour dans Firebase
-            const docRef = doc(db, "membres", m.id);
-            await updateDoc(docRef, { Statut: nouveauStatut });
-            // Mettre à jour localement
-            membres[index].Statut = nouveauStatut;
-            afficherTableau("Tous");
-          }
-        });
-      });
+  membres.push({
+    membre: `${nom} ${prenom}`,
+    date,
+    statut,
+    seuil: 0,
+    progression: 0
+  });
 
-      mettreAJourCompteurs();
-    }
+  // ⚡ Sauvegarder dans localStorage
+  saveToLocalStorage();
 
-    // Filtrer
-    document.getElementById("actifs").addEventListener("click", () => afficherTableau("Actif"));
-    document.getElementById("bloques").addEventListener("click", () => afficherTableau("Bloqué"));
-    document.getElementById("tous").addEventListener("click", () => afficherTableau("Tous"));
+  // Mettre à jour le tableau selon la box active
+  const activeBox = boxes.find(b => b.classList.contains("box-active"));
+  if (activeBox === boxActifs) remplirTableau("Actif");
+  else if (activeBox === boxBloques) remplirTableau("Bloqué");
+  else remplirTableau("Tous");
 
-    // Ajouter membre
-    document.getElementById("ajouterMembre").addEventListener("click", async (e) => {
-      e.preventDefault();
+  modal.classList.add("hidden");
+  form.reset();
+});
 
-      const nouveauMembre = {
-        nom: document.getElementById("nom").value + " " + document.getElementById("prenom").value,
-        date: new Date().toLocaleDateString("fr-FR"),
-        Seuil: "0 CFA",
-        Progression: "0%",
-        Statut: "Actif",
-        naissance: document.getElementById("naissance").value,
-        profession: document.getElementById("profession").value,
-        email: document.getElementById("email").value,
-        tel: document.getElementById("tel").value,
-        adresse: document.getElementById("adresse").value,
-        organisation: document.getElementById("organisation").value,
-      };
-
-      try {
-        const docRef = await addDoc(collection(db, "membres"), nouveauMembre);
-        nouveauMembre.id = docRef.id; // Ajouter l'ID pour gérer le changement de statut
-        membres.push(nouveauMembre);
-        afficherTableau("Tous");
-        modal.classList.add("hidden");
-        document.getElementById("formMembre").reset();
-        console.log("✅ Membre ajouté dans Firebase");
-      } catch (e) {
-        console.error("❌ Erreur Firebase :", e);
-      }
-    });
-
-    // Charger les membres existants depuis Firebase
-    async function chargerMembres() {
-      const querySnapshot = await getDocs(collection(db, "membres"));
-      membres = [];
-      querySnapshot.forEach(docSnap => {
-        const data = docSnap.data();
-        data.id = docSnap.id;
-        membres.push(data);
-      });
-      afficherTableau("Tous");
-    }
-
-    chargerMembres();
+// ======================
+// Initialisation
+// ======================
+loadFromLocalStorage();
+remplirTableau("Tous");
+setActiveBox(boxTous);
