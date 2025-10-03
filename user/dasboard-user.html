@@ -17,8 +17,8 @@
 
     <title>Dashboard Bakéli Tontine</title>
   </head>
-  <!-- <body class="bg-gray-200"> -->
-    <body class="bg-gradient-to-r from-blue-200 via-purple-500 to-slate-500">
+  <body class="bg-gray-200">
+    <!-- <body class="bg-gradient-to-r from-blue-200 via-purple-500 to-slate-500"> -->
 
     <div class="flex h-screen overflow-hidden">
       <!-- Sidebar -->
@@ -148,8 +148,9 @@
                   alt="Avatar"
                   class="w-10 h-10 rounded-full object-cover"
                 />
+                
                 <div class="flex flex-col">
-                  <span class="font-semibold text-gray-900 text-sm md:text-lg"
+                  <span class="font-semibold text-gray-900 text-sm md:text-lg" 
                     >Ahmet Tidiane Cissé</span
                   >
                   <span class="text-gray-500 text-xs md:text-sm"
@@ -550,128 +551,143 @@
       </div> -->
 
     <!-- Config chart  -->
-    <script type="module">
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
-    import { redirectBasedOnRole } from "../connexion.js"; // adapte le chemin selon ton projet
-      // Line chart (évolution des cotisations)
-      const lineCtx = document.getElementById("lineCanvas").getContext("2d");
-      const lineChart = new Chart(lineCtx, {
-        type: "line",
-        data: {
-          labels: ["Jan", "Fév", "Mars", "Avr", "Mai", "Juin"], // Mois
-          datasets: [
-            {
-              label: "Cotisations (CFA)",
-              data: [], // Valeurs
-              borderColor: "#0A3545",
-              backgroundColor: "rgba(75, 192, 192, 0.2)",
-              fill: true,
-              tension: 0.4, // courbes arrondies
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: { display: true },
-            title: { display: false },
-          },
-          scales: {
-            y: { beginAtZero: true },
-          },
-        },
-      });
+ <script type="module">
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+import { getUserData } from "../js/connexion.js"; 
 
-      // Graphique en barres : Statistiques
-      const barCtx = document.getElementById("barCanvas").getContext("2d");
-      const barChart = new Chart(barCtx, {
-        type: "pie",
-        data: {
-          labels: [""], // Membres
-          datasets: [
-            {
-              label: "Montants cotisés",
-              data: [ ], // Valeurs
-              backgroundColor: ["#20DF7F", "#FFA8A7", ],
-              borderRadius: 8, // coins arrondis
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: { display: false },
-          },
-          scales: {
-            y: { beginAtZero: true },
-          },
-        },
-      });
+// === CONFIG LINE CHART (évolution des cotisations par mois) ===
+const lineCtx = document.getElementById("lineCanvas").getContext("2d");
+const lineChart = new Chart(lineCtx, {
+  type: "line",
+  data: {
+    labels: ["Octobre", "Novembre", "Décembre", "Janvier", "Février"], 
+    datasets: [
+      {
+        label: "Cotisations (FCFA)",
+        data: [0, 0, 0, 0, 0], // Montants mensuels
+        borderColor: "#0A3545",
+        backgroundColor: "rgba(75,192,192,0.3)",
+        fill: true,
+        tension: 0.4,
+        pointBackgroundColor: "#0A3545",
+        pointRadius: 6,
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: true } },
+    scales: { y: { beginAtZero: true } },
+  },
+});
 
-      // Fonction pour formater les montants en CFA
-         
-      let paymentValidated = false;
+// === CONFIG PIE CHART (statistiques globales) ===
+const barCtx = document.getElementById("barCanvas").getContext("2d");
+const barChart = new Chart(barCtx, {
+  type: "pie",
+  data: {
+    labels: ["Cotisé", "Restant"],
+    datasets: [
+      {
+        data: [0, 300000], // Cotisé vs Restant
+        backgroundColor: ["#20DF7F", "#FFA8A7"],
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { position: "bottom" } },
+  },
+});
 
-      const payment = document.getElementById("validerPayment");
-      const cotiserBtn = document.getElementById("cotiser");
+// === LOGIQUE DE PAIEMENT ===
+let paymentValidated = false;
+let totalCotise = 0;
+const objectif = 300000;
+const paiementMensuel = 50000;
 
-      payment.addEventListener("click", function () {
-        if (paymentValidated) {
-          alert("Vous ne pouvez déposer deux fois dans le même mois !");
-        }
+const payment = document.getElementById("validerPayment");
+const cotiserBtn = document.getElementById("cotiser");
 
-        // Update totals
+payment.addEventListener("click", function () {
+  if (paymentValidated) {
+    alert("⚠️ Vous ne pouvez déposer deux fois dans le même mois !");
+    return;
+  }
 
-        // Find the first pending row
-        const rows = document.querySelectorAll(".cotisation-row");
-        for (let row of rows) {
-          const statusDiv = row.querySelector(".status-cotisation");
-          if (
-            statusDiv.innerText.trim() === "" ||
-            statusDiv.innerText.trim() !== "Validé"
-          ) {
-            // Update the row
-            const dateDiv = row.querySelector(".date-cotisation");
-            const montantDiv = row.querySelector(".montant-cotisation");
-            dateDiv.innerText = new Date().toLocaleDateString("fr-FR");
-            montantDiv.innerText = "50000 FCFA";
-            statusDiv.innerText = "Validé";
-            statusDiv.classList.remove("text-teal-900");
-            statusDiv.classList.add("text-green-600");
-            document.getElementById("totalCotise").innerText = "50000 FCFA";
-            document.getElementById("montantRestant").innerText = "250000 FCFA";
-            document.getElementById("sommeCotisé").innerText = "50000 FCFA";
-            document.getElementById("pourcent").innerText = "16,6% rempli";
-            lineChart.data.datasets[0].data.push(25000); 
-            linechart.update()
-            barchart.data.datasets[0].data.push(25000);
-            barchart.update();
-            paymentValidated = true; // on bloque les prochains clics
-            break; // Update only the first pending
-          }
-        }
-      });
+  // Trouver la première ligne non validée
+  const rows = document.querySelectorAll(".cotisation-row");
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+    const statusDiv = row.querySelector(".status-cotisation");
 
-      // Block second click on Cotiser button if payment already validated
-      cotiserBtn.addEventListener("click", function (event) {
-        if (paymentValidated) {
-          event.preventDefault();
-          alert("Vous ne pouvez déposer deux fois dans le même mois !");
-          document.getElementById("paymentModal").classList.add("hidden");
-        }
-      });
+    if (statusDiv.innerText.trim() !== "Validé") {
+      // Mise à jour de la ligne
+      const dateDiv = row.querySelector(".date-cotisation");
+      const montantDiv = row.querySelector(".montant-cotisation");
+      dateDiv.innerText = new Date().toLocaleDateString("fr-FR");
+      montantDiv.innerText = paiementMensuel + " FCFA";
+      statusDiv.innerText = "Validé";
+      statusDiv.classList.remove("text-teal-900");
+      statusDiv.classList.add("text-green-600");
+
+      // Mise à jour des totaux
+      totalCotise += paiementMensuel;
+      document.getElementById("totalCotise").innerText = totalCotise + " FCFA";
+      document.getElementById("montantRestant").innerText =
+        objectif - totalCotise + " FCFA";
+      document.getElementById("sommeCotisé").innerText = totalCotise + " FCFA";
+      document.getElementById("pourcent").innerText =
+        ((totalCotise / objectif) * 100).toFixed(1) + "% rempli";
+
+      // === Mise à jour du LINE CHART ===
+      lineChart.data.datasets[0].data[i] = paiementMensuel;
+      lineChart.update();
+
+      // === Mise à jour du PIE CHART ===
+      barChart.data.datasets[0].data = [totalCotise, objectif - totalCotise];
+      barChart.update();
+
+      paymentValidated = true; // Empêche plusieurs dépôts
+      break;
+    }
+  }
+
+  // Fermer le modal après validation
+  document.getElementById("paymentModal").classList.add("hidden");
+});
+
+// Empêcher ouverture si déjà payé
+cotiserBtn.addEventListener("click", function (event) {
+  if (paymentValidated) {
+    event.preventDefault();
+    alert("⚠️ Vous avez déjà cotisé ce mois-ci !");
+    document.getElementById("paymentModal").classList.add("hidden");
+  }
+});
+
+// === RÉCUP INFO UTILISATEUR ===
+const auth = getAuth();
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const userInfo = await getUserData(user.uid);
+    if (userInfo) {
+      // ✅ Afficher prénom et nom, ou email si manquant
+      const displayName = userInfo.prenom 
+        ? `${userInfo.prenom} ${userInfo.nom || ""}`.trim() 
+        : user.email;
+      document.getElementById("userName").textContent = displayName;
+    }
+  } else {
+    window.location.href = "index.html";
+  }
+});
+</script>
 
 
-
-      // Nom de l'tilisateur
-       const userInfo = await redirectBasedOnRole(user.uid)
-       
-  
-    </script>
      <script type="module" src="../js/userDashboard.js"></script>
      <script type="module" src="../auth.js"></script>
   </body>
 </html>
-
- 
-

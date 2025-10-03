@@ -5,7 +5,7 @@ import { signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/fir
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
 // --- LOGIQUE DE REDIRECTION BASÉE SUR LE RÔLE ---
-async function redirectBasedOnRole(uid) {
+ export async function redirectBasedOnRole(uid) {
     try {
           const userDocRef = doc(db, "users", uid);
         const docSnap = await getDoc(userDocRef);
@@ -14,7 +14,7 @@ async function redirectBasedOnRole(uid) {
             const role = docSnap.data().role;
 
             if (role === "admin") {
-                window.location.href = "../admin/dasboard.html"; 
+                window.location.href = "../admin/dasboard.html";
             } else {
                 window.location.href = "../user/dasboard-user.html";
             }
@@ -26,6 +26,23 @@ async function redirectBasedOnRole(uid) {
     } catch (error) {
         alert("Erreur lors de la vérification du rôle : " + error.message);
         console.error("Erreur Firestore:", error);
+    }
+}
+
+// --- NOUVELLE FONCTION POUR OBTENIR LES DONNÉES UTILISATEUR ---
+export async function getUserData(uid) {
+    try {
+        const userDocRef = doc(db, "users", uid);
+        const docSnap = await getDoc(userDocRef);
+        if (docSnap.exists()) {
+            return docSnap.data();
+        } else {
+            console.warn("Utilisateur non trouvé pour l'UID:", uid);
+            return null;
+        }
+    } catch (error) {
+        console.error("Erreur lors de la récupération des données utilisateur:", error);
+        return null;
     }
 }
 
